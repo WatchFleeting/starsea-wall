@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>温馨祝福 - 传递美好祝愿</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f9f0ff, #e6f7ff);
+            color: #555;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0 20px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #ff6b6b, #6a11cb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #777;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 40px 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .wish-form {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            flex: 1;
+            min-width: 300px;
+            margin: 15px;
+            transition: transform 0.3s;
+        }
+        
+        .wish-form:hover {
+            transform: translateY(-5px);
+        }
+        
+        .wish-form h2 {
+            color: #6a11cb;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.2);
+            outline: none;
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 14px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(106, 17, 203, 0.3);
+        }
+        
+        .wish-display {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            flex: 1;
+            min-width: 300px;
+            margin: 15px;
+            transition: transform 0.3s;
+        }
+        
+        .wish-display:hover {
+            transform: translateY(-5px);
+        }
+        
+        .wish-display h2 {
+            color: #ff6b6b;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        
+        .wish-container {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .wish-item {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #6a11cb;
+            transition: all 0.3s;
+        }
+        
+        .wish-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .wish-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .wish-name {
+            font-weight: 600;
+            color: #6a11cb;
+        }
+        
+        .wish-date {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        .wish-text {
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .wish-category {
+            display: inline-block;
+            background: #e6f7ff;
+            color: #2575fc;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+        
+        .wish-category.birthday {
+            background: #fff0f6;
+            color: #eb2f96;
+        }
+        
+        .wish-category.festival {
+            background: #f6ffed;
+            color: #52c41a;
+        }
+        
+        .wish-category.encouragement {
+            background: #f9f0ff;
+            color: #722ed1;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 50px 0;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 30px 20px;
+            margin: 15px;
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature i {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .feature h3 {
+            margin-bottom: 15px;
+            color: #444;
+        }
+        
+        .feature p {
+            color: #777;
+            line-height: 1.6;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            color: #888;
+            margin-top: 50px;
+            border-top: 1px solid #eee;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            color: #777;
+            margin: 0 10px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .social-links a:hover {
+            background: #6a11cb;
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                flex-direction: column;
+            }
+            
+            .wish-form, .wish-display {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements" id="floating-elements"></div>
+    
+    <div class="container">
+        <header>
+            <h1>温馨祝福</h1>
+            <p class="subtitle">传递美好祝愿，温暖每一颗心灵。在这里，您可以发送祝福、分享喜悦，让爱与关怀在人与人之间流动。</p>
+        </header>
+        
+        <div class="content">
+            <div class="wish-form">
+                <h2>发送祝福</h2>
+                <form id="blessing-form">
+                    <div class="form-group">
+                        <label for="sender-name">您的姓名</label>
+                        <input type="text" id="sender-name" placeholder="请输入您的姓名" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="receiver-name">收件人姓名</label>
+                        <input type="text" id="receiver-name" placeholder="请输入收件人姓名" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="blessing-category">祝福类别</label>
+                        <select id="blessing-category" required>
+                            <option value="">请选择祝福类别</option>
+                            <option value="birthday">生日祝福</option>
+                            <option value="festival">节日祝福</option>
+                            <option value="encouragement">鼓励祝福</option>
+                            <option value="other">其他祝福</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="blessing-text">祝福内容</label>
+                        <textarea id="blessing-text" placeholder="请写下您的祝福..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn">发送祝福 <i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+            
+            <div class="wish-display">
+                <h2>祝福墙</h2>
+                <div class="wish-container" id="wish-container">
+                    <!-- 祝福卡片将通过JavaScript动态添加 -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-heart"></i>
+                <h3>温暖传递</h3>
+                <p>用文字传递温暖，让每一份祝福都充满真挚的情感，温暖收件人的心灵。</p>
+            </div>
+            
+            <div class="feature">
+                <i class="fas fa-share-alt"></i>
+                <h3>分享喜悦</h3>
+                <p>将您的喜悦和祝福分享给亲朋好友，让快乐在彼此之间传递和倍增。</p>
+            </div>
+            
+            <div class="feature">
+                <i class="fas fa-magic"></i>
+                <h3>创意祝福</h3>
+                <p>提供多种祝福模板和创意建议，帮助您表达最独特、最贴心的祝福。</p>
+            </div>
+        </div>
+        
+        <footer>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-weixin"></i></a>
+                <a href="#"><i class="fab fa-weibo"></i></a>
+                <a href="#"><i class="fab fa-qq"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p>© 2023 温馨祝福网页 | 设计制作：祝福小助手</p>
+            <p>愿您的每一天都充满阳光和欢笑</p>
+        </footer>
+    </div>
+
+    <script>
+        // 创建浮动元素
+        function createFloatingElements() {
+            const container = document.getElementById('floating-elements');
+            const types = ['❤', '✨', '⭐', '🌸', '🎉', '💫', '🎈', '🌟'];
+            
+            for (let i = 0; i < 20; i++) {
+                const element = document.createElement('div');
+                element.classList.add('floating-element');
+                element.innerHTML = types[Math.floor(Math.random() * types.length)];
+                
+                // 随机属性
+                const size = Math.random() * 30 + 10;
+                element.style.width = `${size}px`;
+                element.style.height = `${size}px`;
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.top = `${Math.random() * 100}%`;
+                element.style.opacity = Math.random() * 0.5 + 0.2;
+                element.style.fontSize = `${size * 0.7}px`;
+                element.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                element.style.animationDelay = `${Math.random() * 5}s`;
+                
+                container.appendChild(element);
+            }
+        }
+        
+        // 处理祝福表单提交
+        document.getElementById('blessing-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const sender = document.getElementById('sender-name').value;
+            const receiver = document.getElementById('receiver-name').value;
+            const category = document.getElementById('blessing-category').value;
+            const text = document.getElementById('blessing-text').value;
+            
+            if (sender && receiver && category && text) {
+                addWishToDisplay(sender, receiver, category, text);
+                
+                // 重置表单
+                document.getElementById('blessing-form').reset();
+                
+                // 显示成功消息
+                showMessage('祝福发送成功！', 'success');
+            } else {
+                showMessage('请填写所有字段！', 'error');
+            }
+        });
+        
+        // 添加祝福到展示区
+        function addWishToDisplay(sender, receiver, category, text) {
+            const container = document.getElementById('wish-container');
+            const wishItem = document.createElement('div');
+            wishItem.classList.add('wish-item');
+            
+            // 获取当前日期
+            const now = new Date();
+            const dateStr = `${now.getFullYear()}-${(now.getMonth()+1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
+            
+            // 根据类别设置样式
+            let categoryText = '';
+            let categoryClass = '';
+            switch(category) {
+                case 'birthday':
+                    categoryText = '生日祝福';
+                    categoryClass = 'birthday';
+                    break;
+                case 'festival':
+                    categoryText = '节日祝福';
+                    categoryClass = 'festival';
+                    break;
+                case 'encouragement':
+                    categoryText = '鼓励祝福';
+                    categoryClass = 'encouragement';
+                    break;
+                default:
+                    categoryText = '其他祝福';
+            }
+            
+            wishItem.innerHTML = `
+                <div class="wish-header">
+                    <div class="wish-name">${sender} → ${receiver}</div>
+                    <div class="wish-date">${dateStr}</div>
+                </div>
+                <div class="wish-text">${text}</div>
+                <div class="wish-category ${categoryClass}">${categoryText}</div>
+            `;
+            
+            // 添加到容器顶部
+            container.insertBefore(wishItem, container.firstChild);
+            
+            // 添加动画效果
+            wishItem.style.opacity = '0';
+            wishItem.style.transform = 'translateY(-20px)';
+            
+            setTimeout(() => {
+                wishItem.style.transition = 'all 0.5s';
+                wishItem.style.opacity = '1';
+                wishItem.style.transform = 'translateY(0)';
+            }, 10);
+        }
+        
+        // 显示消息
+        function showMessage(message, type) {
+            // 创建消息元素
+            const messageEl = document.createElement('div');
+            messageEl.textContent = message;
+            messageEl.style.position = 'fixed';
+            messageEl.style.top = '20px';
+            messageEl.style.right = '20px';
+            messageEl.style.padding = '15px 20px';
+            messageEl.style.borderRadius = '10px';
+            messageEl.style.color = 'white';
+            messageEl.style.fontWeight = '500';
+            messageEl.style.zIndex = '1000';
+            messageEl.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+            messageEl.style.transform = 'translateX(100px)';
+            messageEl.style.opacity = '0';
+            messageEl.style.transition = 'all 0.5s';
+            
+            if (type === 'success') {
+                messageEl.style.background = 'linear-gradient(to right, #52c41a, #73d13d)';
+            } else {
+                messageEl.style.background = 'linear-gradient(to right, #ff4d4f, #ff7875)';
+            }
+            
+            document.body.appendChild(messageEl);
+            
+            // 显示动画
+            setTimeout(() => {
+                messageEl.style.transform = 'translateX(0)';
+                messageEl.style.opacity = '1';
+            }, 10);
+            
+            // 隐藏动画
+            setTimeout(() => {
+                messageEl.style.transform = 'translateX(100px)';
+                messageEl.style.opacity = '0';
+                
+                // 移除元素
+                setTimeout(() => {
+                    document.body.removeChild(messageEl);
+                }, 500);
+            }, 3000);
+        }
+        
+        // 添加一些示例祝福
+        function addSampleWishes() {
+            const samples = [
+                {
+                    sender: '小明',
+                    receiver: '小红',
+                    category: 'birthday',
+                    text: '祝你生日快乐！愿你的每一天都充满阳光和欢笑，所有的梦想都能实现。'
+                },
+                {
+                    sender: '李老师',
+                    receiver: '全体同学',
+                    category: 'encouragement',
+                    text: '祝同学们学业进步，前程似锦！相信你们的努力一定会换来美好的未来。'
+                },
+                {
+                    sender: '小华',
+                    receiver: '家人',
+                    category: 'festival',
+                    text: '祝全家中秋快乐，团团圆圆！愿我们的生活像月亮一样圆满美好。'
+                }
+            ];
+            
+            samples.forEach(sample => {
+                addWishToDisplay(sample.sender, sample.receiver, sample.category, sample.text);
+            });
+        }
+        
+        // 初始化
+        window.addEventListener('DOMContentLoaded', function() {
+            createFloatingElements();
+            addSampleWishes();
+        });
+    </script>
+</body>
+</html>
