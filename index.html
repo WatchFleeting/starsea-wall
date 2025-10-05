@@ -3,38 +3,810 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>温馨祝福 - 传递美好祝愿</title>
+    <title>中秋祝福墙 - 月圆人团圆</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', 'Microsoft YaHei', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #f9f0ff, #e6f7ff);
-            color: #555;
+            background: linear-gradient(135deg, #0f1b3a, #2a2352, #4a2c5c);
+            color: #f5e9d7;
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* 夜空星星背景 */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle 5s infinite ease-in-out;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+            z-index: 2;
         }
         
         header {
             text-align: center;
             padding: 40px 0 20px;
+            position: relative;
         }
         
         h1 {
-            font-size: 3rem;
+            font-size: 3.2rem;
             margin-bottom: 15px;
-            background: linear-gradient(to right, #ff6b6b, #6a11cb);
+            background: linear-gradient(to right, #ffcc00, #ff9933, #ff6666);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: #e6d3b1;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        .moon {
+            position: absolute;
+            top: 30px;
+            right: 5%;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle at 30% 30%, #f9f3d5, #e6d3b1, #d4b56a);
+            border-radius: 50%;
+            box-shadow: 0 0 40px 10px rgba(255, 215, 0, 0.4);
+            z-index: 1;
+            animation: float 8s infinite ease-in-out;
+        }
+        
+        .moon::after {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 15%;
+            width: 30px;
+            height: 30px;
+            background: rgba(200, 180, 120, 0.4);
+            border-radius: 50%;
+            box-shadow: 
+                40px 15px 0 -5px rgba(200, 180, 120, 0.3),
+                20px 40px 0 0 rgba(200, 180, 120, 0.3),
+                50px 50px 0 -10px rgba(200, 180, 120, 0.2);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .lantern {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            background: linear-gradient(to bottom, #d32f2f, #b71c1c);
+            border-radius: 30px 30px 15px 15px;
+            top: 40px;
+            left: 5%;
+            box-shadow: 0 0 20px rgba(255, 87, 34, 0.6);
+            animation: swing 6s infinite ease-in-out;
+            transform-origin: top center;
+        }
+        
+        .lantern::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            background: #ffcc00;
+            top: -10px;
+            left: 15px;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .lantern::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 10px;
+            background: #ffcc00;
+            bottom: -10px;
+            left: 10px;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        @keyframes swing {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 40px 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .wish-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            flex: 1;
+            min-width: 300px;
+            margin: 15px;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .wish-form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+        
+        .wish-form h2 {
+            color: #ffcc00;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.8rem;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #e6d3b1;
+            font-weight: 500;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.1);
+            color: #f5e9d7;
+        }
+        
+        input::placeholder, textarea::placeholder {
+            color: rgba(245, 233, 215, 0.7);
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            border-color: #ffcc00;
+            box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.3);
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #ff9933, #ff6666);
+            color: #2a2352;
+            border: none;
+            border-radius: 50px;
+            padding: 14px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(255, 102, 102, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 102, 102, 0.6);
+        }
+        
+        .wish-display {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            flex: 1;
+            min-width: 300px;
+            margin: 15px;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .wish-display:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+        
+        .wish-display h2 {
+            color: #ffcc00;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.8rem;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
+        }
+        
+        .wish-container {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        /* 自定义滚动条 */
+        .wish-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .wish-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        .wish-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #ff9933, #ff6666);
+            border-radius: 10px;
+        }
+        
+        .wish-item {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #ffcc00;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .wish-item::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 204, 0, 0.2);
+            border-radius: 50%;
+        }
+        
+        .wish-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .wish-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .wish-name {
+            font-weight: 600;
+            color: #ffcc00;
+        }
+        
+        .wish-date {
+            color: #e6d3b1;
+            font-size: 0.9rem;
+        }
+        
+        .wish-text {
+            line-height: 1.6;
+            color: #f5e9d7;
+            margin-bottom: 10px;
+        }
+        
+        .wish-category {
+            display: inline-block;
+            background: rgba(255, 204, 0, 0.2);
+            color: #ffcc00;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+        
+        .wish-category.family {
+            background: rgba(106, 76, 219, 0.3);
+            color: #b39ddb;
+        }
+        
+        .wish-category.friends {
+            background: rgba(255, 105, 97, 0.3);
+            color: #ffab91;
+        }
+        
+        .wish-category.health {
+            background: rgba(77, 182, 172, 0.3);
+            color: #80cbc4;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 50px 0;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 30px 20px;
+            margin: 15px;
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .feature i {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #ffcc00, #ff9933);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .feature h3 {
+            margin-bottom: 15px;
+            color: #ffcc00;
+        }
+        
+        .feature p {
+            color: #e6d3b1;
+            line-height: 1.6;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            color: #b8a89a;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: #e6d3b1;
+            margin: 0 10px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .social-links a:hover {
+            background: #ffcc00;
+            color: #2a2352;
+            transform: translateY(-3px);
+        }
+        
+        .bunny {
+            position: fixed;
+            bottom: 20px;
+            right: 5%;
+            width: 80px;
+            height: 100px;
+            z-index: 1;
+        }
+        
+        .bunny-ear {
+            position: absolute;
+            width: 20px;
+            height: 50px;
+            background: #f5e9d7;
+            border-radius: 50% 50% 40% 40%;
+            top: -30px;
+        }
+        
+        .bunny-ear.left {
+            left: 15px;
+            transform: rotate(-10deg);
+        }
+        
+        .bunny-ear.right {
+            right: 15px;
+            transform: rotate(10deg);
+        }
+        
+        .bunny-face {
+            position: absolute;
+            width: 80px;
+            height: 70px;
+            background: #f5e9d7;
+            border-radius: 50% 50% 40% 40%;
+            top: 0;
+        }
+        
+        .bunny-eye {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #333;
+            border-radius: 50%;
+            top: 25px;
+        }
+        
+        .bunny-eye.left {
+            left: 25px;
+        }
+        
+        .bunny-eye.right {
+            right: 25px;
+        }
+        
+        .bunny-nose {
+            position: absolute;
+            width: 15px;
+            height: 8px;
+            background: #ff9999;
+            border-radius: 50%;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .moon, .lantern, .bunny {
+                display: none;
+            }
+            
+            .content {
+                flex-direction: column;
+            }
+            
+            .wish-form, .wish-display {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="moon"></div>
+    <div class="lantern"></div>
+    <div class="bunny">
+        <div class="bunny-ear left"></div>
+        <div class="bunny-ear right"></div>
+        <div class="bunny-face">
+            <div class="bunny-eye left"></div>
+            <div class="bunny-eye right"></div>
+            <div class="bunny-nose"></div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>中秋祝福墙</h1>
+            <p class="subtitle">月圆人团圆，祝福传递温暖。在这里，分享您的中秋祝福，让爱与关怀在人与人之间流动。</p>
+        </header>
+        
+        <div class="content">
+            <div class="wish-form">
+                <h2>发送中秋祝福</h2>
+                <form id="blessing-form">
+                    <div class="form-group">
+                        <label for="sender-name">您的姓名</label>
+                        <input type="text" id="sender-name" placeholder="请输入您的姓名" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="receiver-name">收件人姓名</label>
+                        <input type="text" id="receiver-name" placeholder="请输入收件人姓名" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="blessing-category">祝福类别</label>
+                        <select id="blessing-category" required>
+                            <option value="">请选择祝福类别</option>
+                            <option value="family">团圆祝福</option>
+                            <option value="friends">友情祝福</option>
+                            <option value="health">安康祝福</option>
+                            <option value="other">其他祝福</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="blessing-text">祝福内容</label>
+                        <textarea id="blessing-text" placeholder="请写下您的中秋祝福..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn">发送中秋祝福 <i class="fas fa-moon"></i></button>
+                </form>
+            </div>
+            
+            <div class="wish-display">
+                <h2>中秋祝福墙</h2>
+                <div class="wish-container" id="wish-container">
+                    <!-- 祝福卡片将通过JavaScript动态添加 -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-moon"></i>
+                <h3>月圆人团圆</h3>
+                <p>中秋之夜，月圆人团圆，送上最真挚的祝福，让爱与温暖传递每个家庭。</p>
+            </div>
+            
+            <div class="feature">
+                <i class="fas fa-heart"></i>
+                <h3>祝福传情</h3>
+                <p>用文字传递深情厚谊，让每一份祝福都承载着中秋的思念与关怀。</p>
+            </div>
+            
+            <div class="feature">
+                <i class="fas fa-star"></i>
+                <h3>传统文化</h3>
+                <p>传承中华优秀传统文化，感受中秋佳节的历史底蕴与文化魅力。</p>
+            </div>
+        </div>
+        
+        <footer>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-weixin"></i></a>
+                <a href="#"><i class="fab fa-weibo"></i></a>
+                <a href="#"><i class="fab fa-qq"></i></a>
+                <a href="#"><i class="fas fa-share-alt"></i></a>
+            </div>
+            <p>© 2025 中秋祝福墙 | 设计制作：鸿渚</p>
+            <p>愿您的生活如中秋明月，圆满美好！</p>
+        </footer>
+    </div>
+
+    <script>
+        // 创建星星背景
+        function createStars() {
+            const container = document.getElementById('stars');
+            const starCount = 150;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // 随机属性
+                const size = Math.random() * 3;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.opacity = Math.random() * 0.7 + 0.3;
+                star.style.animationDuration = `${Math.random() * 10 + 5}s`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                
+                container.appendChild(star);
+            }
+        }
+        
+        // 处理祝福表单提交
+        document.getElementById('blessing-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const sender = document.getElementById('sender-name').value;
+            const receiver = document.getElementById('receiver-name').value;
+            const category = document.getElementById('blessing-category').value;
+            const text = document.getElementById('blessing-text').value;
+            
+            if (sender && receiver && category && text) {
+                addWishToDisplay(sender, receiver, category, text);
+                
+                // 重置表单
+                document.getElementById('blessing-form').reset();
+                
+                // 显示成功消息
+                showMessage('中秋祝福发送成功！', 'success');
+            } else {
+                showMessage('请填写所有字段！', 'error');
+            }
+        });
+        
+        // 添加祝福到展示区
+        function addWishToDisplay(sender, receiver, category, text) {
+            const container = document.getElementById('wish-container');
+            const wishItem = document.createElement('div');
+            wishItem.classList.add('wish-item');
+            
+            // 获取当前日期
+            const now = new Date();
+            const dateStr = `${now.getFullYear()}-${(now.getMonth()+1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
+            
+            // 根据类别设置样式
+            let categoryText = '';
+            let categoryClass = '';
+            switch(category) {
+                case 'family':
+                    categoryText = '团圆祝福';
+                    categoryClass = 'family';
+                    break;
+                case 'friends':
+                    categoryText = '友情祝福';
+                    categoryClass = 'friends';
+                    break;
+                case 'health':
+                    categoryText = '安康祝福';
+                    categoryClass = 'health';
+                    break;
+                default:
+                    categoryText = '其他祝福';
+            }
+            
+            wishItem.innerHTML = `
+                <div class="wish-header">
+                    <div class="wish-name">${sender} → ${receiver}</div>
+                    <div class="wish-date">${dateStr}</div>
+                </div>
+                <div class="wish-text">${text}</div>
+                <div class="wish-category ${categoryClass}">${categoryText}</div>
+            `;
+            
+            // 添加到容器顶部
+            container.insertBefore(wishItem, container.firstChild);
+            
+            // 添加动画效果
+            wishItem.style.opacity = '0';
+            wishItem.style.transform = 'translateY(-20px)';
+            
+            setTimeout(() => {
+                wishItem.style.transition = 'all 0.5s';
+                wishItem.style.opacity = '1';
+                wishItem.style.transform = 'translateY(0)';
+            }, 10);
+        }
+        
+        // 显示消息
+        function showMessage(message, type) {
+            // 创建消息元素
+            const messageEl = document.createElement('div');
+            messageEl.textContent = message;
+            messageEl.style.position = 'fixed';
+            messageEl.style.top = '20px';
+            messageEl.style.right = '20px';
+            messageEl.style.padding = '15px 20px';
+            messageEl.style.borderRadius = '10px';
+            messageEl.style.color = 'white';
+            messageEl.style.fontWeight = '500';
+            messageEl.style.zIndex = '1000';
+            messageEl.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+            messageEl.style.transform = 'translateX(100px)';
+            messageEl.style.opacity = '0';
+            messageEl.style.transition = 'all 0.5s';
+            
+            if (type === 'success') {
+                messageEl.style.background = 'linear-gradient(to right, #52c41a, #73d13d)';
+            } else {
+                messageEl.style.background = 'linear-gradient(to right, #ff4d4f, #ff7875)';
+            }
+            
+            document.body.appendChild(messageEl);
+            
+            // 显示动画
+            setTimeout(() => {
+                messageEl.style.transform = 'translateX(0)';
+                messageEl.style.opacity = '1';
+            }, 10);
+            
+            // 隐藏动画
+            setTimeout(() => {
+                messageEl.style.transform = 'translateX(100px)';
+                messageEl.style.opacity = '0';
+                
+                // 移除元素
+                setTimeout(() => {
+                    document.body.removeChild(messageEl);
+                }, 500);
+            }, 3000);
+        }
+        
+        // 添加示例祝福
+        function addSampleWishes() {
+            const sampleWishes = [
+                {
+                    sender: '明月清风',
+                    receiver: '所有朋友',
+                    category: 'family',
+                    text: '月圆人团圆，灯明情更明。中秋佳节，祝愿所有朋友家庭幸福，团团圆圆！'
+                },
+                {
+                    sender: '桂花飘香',
+                    receiver: '远方亲人',
+                    category: 'friends',
+                    text: '虽然不能与您共赏明月，但我的祝福随着月光洒向您身边。中秋快乐！'
+                },
+                {
+                    sender: '玉兔呈祥',
+                    receiver: '长辈们',
+                    category: 'health',
+                    text: '月是故乡明，人是家乡亲。祝愿长辈们身体安康，笑口常开！'
+                }
+            ];
+            
+            sampleWishes.forEach(wish => {
+                addWishToDisplay(wish.sender, wish.receiver, wish.category, wish.text);
+            });
+        }
+        
+        // 初始化
+        window.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            addSampleWishes();
+        });
+    </script>
+</body>
+</html>            background: linear-gradient(to right, #ff6b6b, #6a11cb);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -564,4 +1336,5 @@
 </body>
 
 </html>
+
 
