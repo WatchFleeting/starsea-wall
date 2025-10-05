@@ -555,34 +555,6 @@
             }, 3000);
         }
         
-        // 添加一些示例祝福
-        function addSampleWishes() {
-            const samples = [
-                {
-                    sender: '小明',
-                    receiver: '小红',
-                    category: 'birthday',
-                    text: '祝你生日快乐！愿你的每一天都充满阳光和欢笑，所有的梦想都能实现。'
-                },
-                {
-                    sender: '李老师',
-                    receiver: '全体同学',
-                    category: 'encouragement',
-                    text: '祝同学们学业进步，前程似锦！相信你们的努力一定会换来美好的未来。'
-                },
-                {
-                    sender: '小华',
-                    receiver: '家人',
-                    category: 'festival',
-                    text: '祝全家中秋快乐，团团圆圆！愿我们的生活像月亮一样圆满美好。'
-                }
-            ];
-            
-            samples.forEach(sample => {
-                addWishToDisplay(sample.sender, sample.receiver, sample.category, sample.text);
-            });
-        }
-        
         // 初始化
         window.addEventListener('DOMContentLoaded', function() {
             createFloatingElements();
@@ -592,3 +564,4 @@
 </body>
 
 </html>
+
