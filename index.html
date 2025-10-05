@@ -765,34 +765,6 @@
             }, 3000);
         }
         
-        // 添加示例祝福
-        function addSampleWishes() {
-            const sampleWishes = [
-                {
-                    sender: '明月清风',
-                    receiver: '所有朋友',
-                    category: 'family',
-                    text: '月圆人团圆，灯明情更明。中秋佳节，祝愿所有朋友家庭幸福，团团圆圆！'
-                },
-                {
-                    sender: '桂花飘香',
-                    receiver: '远方亲人',
-                    category: 'friends',
-                    text: '虽然不能与您共赏明月，但我的祝福随着月光洒向您身边。中秋快乐！'
-                },
-                {
-                    sender: '玉兔呈祥',
-                    receiver: '长辈们',
-                    category: 'health',
-                    text: '月是故乡明，人是家乡亲。祝愿长辈们身体安康，笑口常开！'
-                }
-            ];
-            
-            sampleWishes.forEach(wish => {
-                addWishToDisplay(wish.sender, wish.receiver, wish.category, wish.text);
-            });
-        }
-        
         // 初始化
         window.addEventListener('DOMContentLoaded', function() {
             createStars();
@@ -801,4 +773,5 @@
     </script>
 </body>
 </html>
+
 
